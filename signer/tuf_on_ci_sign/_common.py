@@ -35,7 +35,7 @@ def signing_event(name: str, config: User) -> Generator[SignerRepository, None, 
         os.environ["PYKCS11LIB"] = config.pykcs11lib
 
     # first, make sure we're up-to-date
-    git_expect(["fetch", config.pull_remote])
+    #git_expect(["fetch", config.pull_remote])
     try:
         git(["checkout", f"{config.pull_remote}/{name}"])
     except subprocess.CalledProcessError:
@@ -116,6 +116,7 @@ def bold_blue(text: str) -> str:
 
 
 def application_update_reminder() -> None:
+    return
     from tuf_on_ci_sign import __version__
 
     update_file = os.path.join(user_cache_dir("tuf-on-ci-sign"), "pypi_release_version")
@@ -159,6 +160,7 @@ def application_update_reminder() -> None:
 
 
 def push_changes(user: User, event_name: str, title: str) -> None:
+    return
     """Push the event branch to users push remote"""
     branch = f"{user.push_remote}/{event_name}"
     msg = f"Press enter to push changes to {branch}"
